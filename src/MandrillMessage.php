@@ -1,6 +1,6 @@
 <?php
 
-namespace SalamWaddah\Mandrill;
+namespace Devkea\Mandrill;
 
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Support\Facades\Config;
@@ -12,6 +12,20 @@ class MandrillMessage extends MailMessage
 
     private $tos = [];
     private $mergeLanguage = self::MERGE_LANGUAGE_HANDLEBARS;
+
+    /**
+     * Attach a file to the message.
+     *
+     * @param  string $file
+     * @param  array $options
+     * @return $this
+     */
+    public function attach($file, array $options = [])
+    {
+        $this->attachments[] = array_merge(['content' => $file], $options);
+
+        return $this;
+    }
 
     public function addTo(string $to): self
     {
@@ -58,6 +72,13 @@ class MandrillMessage extends MailMessage
         return $this;
     }
 
+    public function setKey(string $key): self
+    {
+        $this->key = $key;
+
+        return $this;
+    }
+
     public function structure(): array
     {
         $payload = [
@@ -67,9 +88,10 @@ class MandrillMessage extends MailMessage
             'from_email' => $this->from[0] ?? Config::get('mail.from.address'),
             'from_name' => $this->from[1] ?? Config::get('mail.from.name'),
             'global_merge_vars' => $this->mapGlobalVars(),
+            'attachments' => $this->attachments,
         ];
 
-        if (! empty($this->replyTo)) {
+        if (!empty($this->replyTo)) {
             $payload['headers'] = [
                 'Reply-To' => $this->replyTo[0][0],
             ];

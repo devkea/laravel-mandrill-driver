@@ -1,5 +1,5 @@
 {
-	"name": "salamwaddah/laravel-mandrill-notifications-channel",
+	"name": "devkea/laravel-mandrill-driver",
 	"description": "Mandrill notification channel for Laravel 5, 6, 7, 8, 9",
 	"type": "library",
 	"license": "MIT",
@@ -17,20 +17,20 @@
 		"channel"
 	],
 	"support": {
-		"issues": "https://github.com/salamwaddah/laravel-mandrill-driver/issues",
-		"source": "https://github.com/salamwaddah/laravel-mandrill-driver"
+		"issues": "https://github.com/devkea/laravel-mandrill-driver/issues",
+		"source": "https://github.com/devkea/laravel-mandrill-driver"
 	},
 	"authors": [
 		{
-			"name": "Salam Waddah",
-			"email": "salamwaddah@gmail.com",
-			"homepage": "https://salamwaddah.com/",
+			"name": "Evgeniy Kuznetsov",
+			"email": "mail@devkea.ru",
+			"homepage": "https://devkea.ru/",
 			"role": "Developer"
 		}
 	],
 	"autoload": {
 		"psr-4": {
-			"SalamWaddah\\Mandrill\\": "src/"
+			"Devkea\\Mandrill\\": "src/"
 		}
 	},
 	"require": {
@@ -51,5 +51,5 @@
 			"chmod a+x .git/hooks/pre-commit"
 		]
 	},
-	"version": "1.2.8"
+	"version": "1.3"
 }

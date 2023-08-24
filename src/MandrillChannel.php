@@ -1,6 +1,6 @@
 <?php
 
-namespace SalamWaddah\Mandrill;
+namespace Devkea\Mandrill;
 
 use GuzzleHttp\Client;
 use Illuminate\Notifications\Notification;
@@ -22,7 +22,7 @@ class MandrillChannel
          * @var $message MandrillMessage
          */
         $message = $notification->toMandrill($notifiable);
-
+//        dd(print_r($this->toArray($message), true));
         $this->client->post($this->url, [
             'json' => $this->toArray($message),
         ]);
@@ -31,7 +31,7 @@ class MandrillChannel
     public function toArray(MandrillMessage $message)
     {
         return [
-            'key' => env('MANDRILL_SECRET', Config::get('mail.mandrill.key')),
+            'key' => $message->key ?? env('MANDRILL_SECRET', Config::get('mail.mandrill.key')),
             'template_name' => $message->view,
             'template_content' => [],
             'message' => $message->structure(),

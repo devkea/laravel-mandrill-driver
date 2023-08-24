@@ -1,10 +1,12 @@
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/salamwaddah/laravel-mandrill-driver.svg?style=flat-square)](https://packagist.org/packages/salamwaddah/laravel-mandrill-driver)
-[![Total Downloads](https://img.shields.io/packagist/dt/salamwaddah/laravel-mandrill-driver?style=flat-square)](https://packagist.org/packages/salamwaddah/laravel-mandrill-driver)
-[![MIT Licensed](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
+Source: https://github.com/salamwaddah/laravel-mandrill-driver
+
+What's new:
+1) Adding attached files;
+2) Specifying a dynamic API key.
 
 ## Installation 
 ```
-composer require salamwaddah/laravel-mandrill-driver
+composer require devkea/laravel-mandrill-driver
 ```
 
 ## Configure
@@ -60,6 +62,7 @@ public function toMandrill($notifiable)
         ->fromName('Customized From')
         ->fromEmail('custom_from@example.com')
         ->replyTo('reply@example.com')
+        ->attach($notifiable->file)
         ->content([
             'product' => $this->product->toArray(),
         ]);
@@ -76,8 +79,10 @@ public function toMandrill($notifiable)
 |`fromName`|`string`|Overrides the default from name|
 |`fromEmail`|`string`|Overrides the default from email|
 |`content`|`array`|Content array| 
+|`attach`|`array`|Adds a file| 
 |`replyTo`|`string`|Accepts one parameter(`$email`)|
 |`view`|`function`|Accepts 2 params (`$templateName`, `$keyedContentArray`)|
+|`setKey`|`string`|Changes the API key| 
 
 **Note: To keep it consistent with laravel's `Mail` implementation of `replyTo`, you can pass two parameters, second parameter is ignored, and If `replyTo` is called multiple times only first one will be used and others will be ignored. Because mandrill only allows one email address for reply to.**
 
